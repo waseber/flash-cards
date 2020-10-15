@@ -8,6 +8,7 @@ export default React.createContext({
     getQuestionsAnswers: () => {},
     getAQuestion: ()=>{},
     editQuestion: ()=>{},
+    deleteQuestion: ()=>{}
 
 });
 

@@ -1,4 +1,5 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
+import { Redirect } from "react-router-dom";
 import QaContext from '../context/qa';
 
 const EditPage = ({match}) => {
@@ -17,6 +18,20 @@ const EditPage = ({match}) => {
                     context.editQuestion(id, questionText, answerText);
                     //document.getElementsByTagName('form')[0].reset();
                     setStatus("Successfully updated");
+                }
+
+                const deleteQuestion = (e) => {
+                    e.preventDefault();
+                    //confirm deletion
+                    let r = window.confirm("Are you sure you want to delete this question?");
+                    if (r == true) {
+                        context.deleteQuestion(id);
+                        alert("Deleted");
+                        return <Redirect to="/play" />
+                    } 
+
+                    
+
                 }
 
                 return (<>
@@ -41,6 +56,7 @@ const EditPage = ({match}) => {
                         </label>
 
                         <button type="submit">Edit</button>
+                        <button onClick={deleteQuestion}>Delete</button>
                         <p>{status}</p>
                         </form>
             </>)}}

@@ -60,7 +60,8 @@ class App extends Component {
           addQuestionAnswer: this.addQuestionAnswer,
           getQuestionsAnswers: this.getQuestionsAnswers,
           getAQuestion: this.getAQuestion,
-          editQuestion: this.editQuestion
+          editQuestion: this.editQuestion,
+          deleteQuestion: this.deleteQuestion
         }}
       >
         <Router>
