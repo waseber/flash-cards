@@ -8,11 +8,16 @@ import AddPage from './pages/AddPage';
 import QaContext from './context/qa';
 import './App.css';
 import PlayPage from './pages/PlayPage';
+import EditPage from './pages/EditPage';
 
 
 let questionsObj = [];
 if(localStorage.getItem("questions")){
   questionsObj = JSON.parse(localStorage.getItem("questions"))
+}
+
+const updateDB = (db, obj) => {
+  localStorage.setItem(db, JSON.stringify(obj))
 }
 
 //const qaMap = new Map();
@@ -26,18 +31,22 @@ class App extends Component {
   };
   addQuestionAnswer = (q,a) =>{
     questionsObj.push({ q , a})
-    localStorage.setItem("questions", JSON.stringify(questionsObj))
-    //objectStore.add({q:q,a:a});
-    //return tx.complete;
-    //var qaObjectStore = db.transaction("questionsAndAnswers", "readwrite").objectStore("questionsAndAnswers");
-    //customerData.forEach(function(customer) {
-      
-     // qaObjectStore.add(a);
-    //qaMap.set(q,a);
-    //console.log(qaMap.keys())
+    updateDB("questions", questionsObj);    
   };
   getQuestionsAnswers = () => {
     return questionsObj;
+  };
+  getAQuestion = (id) => {
+    console.log(questionsObj[id])
+    return questionsObj[id];
+  };
+  editQuestion = (id,q,a) =>{
+    questionsObj[id] = { q , a};
+    updateDB("questions", questionsObj);
+  }
+  deleteQuestion = (id) => {
+    questionsObj.splice(id,1);
+    updateDB("questions", questionsObj);
   };
 
   render(){
@@ -49,7 +58,9 @@ class App extends Component {
           qa: this.state.qa,
           getCount: this.getCount,
           addQuestionAnswer: this.addQuestionAnswer,
-          getQuestionsAnswers: this.getQuestionsAnswers
+          getQuestionsAnswers: this.getQuestionsAnswers,
+          getAQuestion: this.getAQuestion,
+          editQuestion: this.editQuestion
         }}
       >
         <Router>
@@ -66,6 +77,10 @@ class App extends Component {
                 path="/play"
                 component={PlayPage} 
                 //render={(props) => <AddPage {...props} InUp="in"/>}
+                />
+                <Route 
+                path="/edit/:id" 
+                component={EditPage}
                 />
                 <Route 
                 path="/"

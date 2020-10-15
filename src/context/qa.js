@@ -5,7 +5,9 @@ export default React.createContext({
     qa:{},
     getCount: ()=>{},
     addQuestionAnswer: (q,a) =>{},
-    getQuestionsAnswers: () => {}
+    getQuestionsAnswers: () => {},
+    getAQuestion: ()=>{},
+    editQuestion: ()=>{},
 
 });
 
