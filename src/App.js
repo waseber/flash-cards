@@ -4,11 +4,13 @@ import {
   Route,
   Switch} from 'react-router-dom';
 import NavBar from './components/NavBar';
+import HomePage from './pages/HomePage';
 import AddPage from './pages/AddPage';
 import QaContext from './context/qa';
 import './App.css';
 import PlayPage from './pages/PlayPage';
 import EditPage from './pages/EditPage';
+import NotFoundPage from './pages/NotFoundPage';
 
 
 let questionsObj = [];
@@ -70,23 +72,23 @@ class App extends Component {
         </header>
         <main>
             <Switch>
+              <Route path="/" exact component={HomePage} />
               <Route 
                 path="/add-question" 
                 component={AddPage}
                 />
                 <Route 
                 path="/play"
-                component={PlayPage} 
+                component={PlayPage}
                 //render={(props) => <AddPage {...props} InUp="in"/>}
                 />
                 <Route 
                 path="/edit/:id" 
                 component={EditPage}
                 />
+                
                 <Route 
-                path="/"
-                component={PlayPage} 
-                exact
+                component={NotFoundPage} 
                 />
             </Switch>
         </main>

@@ -1,6 +1,8 @@
 import React, {useState} from 'react';
 import { Redirect } from "react-router-dom";
 import QaContext from '../context/qa';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTrashAlt } from '@fortawesome/free-solid-svg-icons'
 
 const EditPage = ({match}) => {
     let [questionText, setQuestionText] = useState();
@@ -28,9 +30,7 @@ const EditPage = ({match}) => {
                         context.deleteQuestion(id);
                         alert("Deleted");
                         return <Redirect to="/play" />
-                    } 
-
-                    
+                    }                    
 
                 }
 
@@ -56,7 +56,7 @@ const EditPage = ({match}) => {
                         </label>
 
                         <button type="submit">Edit</button>
-                        <button onClick={deleteQuestion}>Delete</button>
+                        <a href="#" onClick={deleteQuestion}><FontAwesomeIcon icon={faTrashAlt} /></a>
                         <p>{status}</p>
                         </form>
             </>)}}

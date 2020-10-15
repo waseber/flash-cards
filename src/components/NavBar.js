@@ -1,12 +1,9 @@
 import React from 'react';
-import {
-    BrowserRouter as Router,
-    Route,
-    Switch, Link} from 'react-router-dom';
+import {NavLink} from 'react-router-dom';
 
 const NavBar = () => (
     <nav>
-        <Link to="/add-question">Add</Link> | <Link to="/play">Play</Link>
+        <NavLink exact to="/">Home</NavLink> | <NavLink to="/add-question">Add</NavLink> | <NavLink to="/play">Play</NavLink>
     </nav>
 );
 

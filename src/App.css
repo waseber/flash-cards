@@ -11,6 +11,10 @@ a{
   text-decoration: none;
 }
 
+.active{
+  text-decoration: underline;
+}
+
 
 header {
   min-height: 10vh;
@@ -39,13 +43,17 @@ label{
 
 #question-field,
 #answer-field{
+  margin: 10px;
   padding: 10px;
   width: 30vw;
   border-radius: 0;
+  border: 0;
+  font-size: 20px;
 }
 
 #question-field:focus,
 #answer-field:focus{
+  margin: 5px;
   border-radius: 4px;
   border: 5px solid white;
   outline: none;
@@ -56,6 +64,17 @@ button{
   margin: 10px;
   padding: 5px 10px;
   min-width: 100px;
+  background-color: aquamarine;
+  color: #4a4a4a;
+  font-size: 20px;
+  border: 0;
+}
+
+button:focus{
+  margin: 5px;
+  border: 5px solid aquamarine;
+  outline: none;
+  transition: all 0.2s ease;
 }
 
 section{
@@ -64,15 +83,17 @@ section{
   align-items: center;
 }
 
-.flash-card{
+.flash-card,
+.inner-card{
   height: 50vh;
   width: 70vw;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
+}
+
+.inner-card{
   background-color: rgba(255,255,255,0.8);
-
-
 }
 
 .question{
@@ -89,6 +110,11 @@ section{
 
 .show{
   display: block;
+}
+
+.paddle{
+  margin: 5px;
+  font-size: 50px;
 }
 
 .vis-hidden{
@@ -129,5 +155,14 @@ section{
 
 @keyframes flip-up {
   0%   {transform: rotateX(90deg)}
+  100% {transform: rotateX(0deg)}
+}
+
+.ani-flip-down{
+  animation: flip-down 0.5s ease-out;
+}
+
+@keyframes flip-down {
+  0%   {transform: rotateX(170deg)}
   100% {transform: rotateX(0deg)}
 }

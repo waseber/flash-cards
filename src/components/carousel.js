@@ -1,5 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {Link} from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faChevronRight, faChevronLeft, faEdit } from '@fortawesome/free-solid-svg-icons'
 
 const Carousel = ({obj}) => {
     console.log(obj)   
@@ -12,22 +14,34 @@ const Carousel = ({obj}) => {
     const flipCard = (e) => {
         e.preventDefault();
         setShowAnswer(!showAnswer);
+        console.log("click")
+        //clone flash-card
+        /*const itm = document.getElementById("flash-card");
+        const cln = itm.cloneNode(true);
+        //append the new one to carousel-center
+        document.getElementById("carousel-center").appendChild(cln);
+        //delete the old one
+        document.getElementById("carousel-center").removeChild(itm);
+
+        
+        if(showAnswer!=true){
+            document.getElementById("flash-card").classList.add("ani-flip-up");
+        } else {
+            document.getElementById("flash-card").classList.add("ani-flip-down");
+        }*/
     }
     const prev = (e) => {
         e.preventDefault();
-        console.log("prev")
         if(currentIndex +1 > 1){
             setCurrentIndex(currentIndex-=1)
             setCurrentQuestion(obj[currentIndex].q)
             setCurrentAnswer(obj[currentIndex].a)
-            //;
             setShowAnswer(false);
         }
     }
 
     const next = (e) => {
         e.preventDefault();
-        console.log("next")
         if(currentIndex < count){
             setCurrentIndex(currentIndex+=1);
             setCurrentQuestion(obj[currentIndex].q)
@@ -37,9 +51,7 @@ const Carousel = ({obj}) => {
         
     }
 
-    return(
-        //obj[currentIndex].map( (question, key) => (
-            
+    return(            
             <>
             <h2>{currentIndex + 1} of {obj.length}</h2>
             <section>
@@ -47,38 +59,41 @@ const Carousel = ({obj}) => {
                 <a href="#"
                     onClick={prev}
                     className={
-                        (currentIndex +1 > 1) ? "" : "vis-hidden"
+                        (currentIndex +1 > 1) ? "paddle" : "paddle vis-hidden"
                     }
-                    >Previous</a>
-                <div>
-                    <article className="flash-card ani-flip-up" >
+                    ><FontAwesomeIcon icon={faChevronLeft} /></a>
+                <div id="carousel-center">
+                    <article id="flash-card" className="flash-card" >
                         
                         <a href="#" 
                             onClick={flipCard}
                             className={
-                                (!showAnswer) ? "question show": "hide"
+                                (!showAnswer) ? "question ani-flip-up": "hide"
                         }>
+                            <div className="inner-card">
                             <h2>Question:</h2>
                             <h3 >{currentQuestion}</h3>
+                            </div>
                         </a>
                         <a href="#" 
                             onClick={flipCard}
                             className={
-                                (showAnswer) ? "answer show": "hide"
-                            }>
+                                (showAnswer) ? "answer  ani-flip-down": "hide"
+                            }> 
+                                <div className="inner-card">
                                 <h2>Answer:</h2>
-                            <h3 >{currentAnswer}
-                        </h3></a>
+                            <h3 >{currentAnswer}</h3>
+                        </div></a>
                     </article>
-                    <Link to={`/edit/${currentIndex}`}>Edit</Link>
+                    <Link to={`/edit/${currentIndex}`}><FontAwesomeIcon icon={faEdit} /></Link>
                 </div>
                 
                 <a href="#" 
                     onClick={next}
                     className={
-                        (currentIndex +1 == count) ? "vis-hidden" : ""
+                        (currentIndex +1 == count) ? "paddle vis-hidden" : "paddle"
                     }
-                    >Next</a>
+                    ><FontAwesomeIcon icon={faChevronRight} /></a>
             </section>
             </>
         //))
