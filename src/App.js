@@ -66,9 +66,9 @@ class App extends Component {
           deleteQuestion: this.deleteQuestion
         }}
       >
-        <Router>
+        <Router basename={process.env.PUBLIC_URL}>
         <header className="App-header">
-          <NavBar count={this.getCount} />
+          <NavBar count={this.getCount()} />
         </header>
         <main>
             <Switch>
