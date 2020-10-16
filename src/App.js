@@ -3,6 +3,7 @@ import {
   BrowserRouter as Router,
   Route,
   Switch} from 'react-router-dom';
+import ReactGa from 'react-ga';
 import HomePage from './pages/HomePage';
 import AddPage from './pages/AddPage';
 import QaContext from './context/qa';
@@ -21,8 +22,14 @@ const updateDB = (db, obj) => {
   localStorage.setItem(db, JSON.stringify(obj))
 }
 
+
+ReactGa.initialize('UA-180626419-1');
+
+ReactGa.pageview('/')
 //const qaMap = new Map();
 class App extends Component {
+
+  
  
   state = {
     qa: questionsObj,
