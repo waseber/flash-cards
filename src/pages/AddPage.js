@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import NavBar from '../components/NavBar';
 import QaContext from '../context/qa';
 
 const AddPage = () => {
@@ -22,6 +23,9 @@ const AddPage = () => {
                 return (
                     
                     <>
+                        <header className="App-header">
+                            <NavBar count={questionCount} />
+                        </header>
                         <p>There are currently {questionCount} questions</p>
                         <form onSubmit={addQuestion}>
                         <label>
@@ -30,7 +34,7 @@ const AddPage = () => {
                         </label>
                         <label>
                             Answer:
-                            <input id="answer-field" type="text" onChange={e => setAnswerText(e.target.value)} />
+                            <input id="answer-field" type="text" autoComplete="off" onChange={e => setAnswerText(e.target.value)} />
                         </label>
 
                         <button type="submit">Add</button>

@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import { Redirect } from "react-router-dom";
+import NavBar from '../components/NavBar';
 import QaContext from '../context/qa';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons'
@@ -35,6 +36,9 @@ const EditPage = ({match}) => {
                 }
 
                 return (<>
+                    <header className="App-header">
+                        <NavBar count={context.getCount()} />
+                    </header>
                 <h2>Edit Your Question</h2>
                 <form onSubmit={editQuestion} key={id}>
                         <label>
@@ -51,6 +55,7 @@ const EditPage = ({match}) => {
                             <input 
                                 id="answer-field" 
                                 type="text" 
+                                autoComplete="off"
                                 onChange={e => setAnswerText(e.target.value)} 
                                 defaultValue={context.getAQuestion(id).a}/>
                         </label>

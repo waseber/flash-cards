@@ -3,7 +3,6 @@ import {
   BrowserRouter as Router,
   Route,
   Switch} from 'react-router-dom';
-import NavBar from './components/NavBar';
 import HomePage from './pages/HomePage';
 import AddPage from './pages/AddPage';
 import QaContext from './context/qa';
@@ -39,7 +38,6 @@ class App extends Component {
     return questionsObj;
   };
   getAQuestion = (id) => {
-    console.log(questionsObj[id])
     return questionsObj[id];
   };
   editQuestion = (id,q,a) =>{
@@ -67,9 +65,6 @@ class App extends Component {
         }}
       >
         <Router basename={process.env.PUBLIC_URL}>
-        <header className="App-header">
-          <NavBar count={this.getCount()} />
-        </header>
         <main>
             <Switch>
               <Route path="/" exact component={HomePage} />

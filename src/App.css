@@ -2,7 +2,7 @@
   padding: 10px;
   text-align: center;
   background-color: #282c34;
-  min-height: 100vh;
+  min-height: calc(100vh - 20px);
   color: white;
   font-family: 'Century Gothic';
   font-size: calc(10px + 2vmin);

@@ -2,6 +2,7 @@ import React from 'react';
 import {NavLink} from 'react-router-dom';
 
 const NavBar = (count) => {
+    console.log("count ", count)
     let PlayLink
     if(count.count>0){
         PlayLink = <span> | <NavLink to="/play">Play</NavLink></span>
