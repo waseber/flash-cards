@@ -68,7 +68,7 @@ class App extends Component {
       >
         <Router>
         <header className="App-header">
-          <NavBar />
+          <NavBar count={this.getCount} />
         </header>
         <main>
             <Switch>
