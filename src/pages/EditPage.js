@@ -1,11 +1,11 @@
 import React, {useState} from 'react';
-import { Redirect } from "react-router-dom";
+import { Redirect, withRouter } from "react-router-dom";
 import NavBar from '../components/NavBar';
 import QaContext from '../context/qa';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons'
 
-const EditPage = ({match}) => {
+const EditPage = ({match, props}) => {
     let [questionText, setQuestionText] = useState();
     let [answerText, setAnswerText] = useState();
     let [status, setStatus] = useState();
@@ -30,7 +30,7 @@ const EditPage = ({match}) => {
                     if (r == true) {
                         context.deleteQuestion(id);
                         alert("Deleted");
-                        return <Redirect to="/play" />
+                        window.location.href= "/flash-cards/play";
                     }                    
 
                 }
@@ -69,4 +69,4 @@ const EditPage = ({match}) => {
     )
 }
 
-export default EditPage;
+export default withRouter(EditPage);
