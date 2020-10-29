@@ -1,5 +1,7 @@
 import React, {useState} from 'react';
 import QaContext from '../context/qa';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faBars } from '@fortawesome/free-solid-svg-icons'
 
 const ToC = ({onQuestionClicked, data}) => {
     const [showMenu, setShowMenu] = useState(false);
@@ -18,12 +20,12 @@ const ToC = ({onQuestionClicked, data}) => {
                 context.setIndex(selectedIndex);
             }*/
             return(<>
-        <a href="#" className="toc-link" onClick={toggleMenu}>Menu</a>
+        <a href="#" className="toc-link" onClick={toggleMenu}><FontAwesomeIcon icon={faBars} /></a>
         <div 
             className={(showMenu)? "toc-component in": "toc-component"}>
             <ul>
             {data.map( (v, i) =>
-                <li key={i}><a href="#" onClick={onQuestionClicked} data={i}>{v.q}</a></li>
+                <li key={i}><a href="#" className="toc-item" onClick={onQuestionClicked} data={i}>{v.q}</a></li>
             )}
             </ul>
         </div>

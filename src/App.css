@@ -205,14 +205,12 @@ section{
   left: 0;
 }
 ul li{
+  position: relative;
   padding: 0;
   list-style: none;
+  height: 30px;
   width: 100%;
-  background: beige;
-  border: 1px solid #4a4a4a;
-  border-radius: 4px 4px 0 0;
 }
-
 
 .toc-component{
   position: fixed;
@@ -230,4 +228,23 @@ ul li{
   left: 0;
   right: auto;
   transition: all 0.5s ease;
+}
+
+.toc-item{
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  height: 30px;
+  width: 100%;
+  background: beige;
+  border: 1px solid #4a4a4a;
+  border-radius: 4px 4px 0 0;
+  color: black
+}
+
+.toc-item:hover{
+  top: -10px;
+  height: 40px;
+  transition: all 0.2s ease;
 }
