@@ -75,7 +75,7 @@ class App extends Component {
           deleteQuestion: this.deleteQuestion
         }}
       >
-        <Router basename={process.env.PUBLIC_URL}>
+        <Router >
         <main>
             <Switch>
               <Route path="/" exact component={HomePage} />

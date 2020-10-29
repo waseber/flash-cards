@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import QaContext from '../context/qa';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBars } from '@fortawesome/free-solid-svg-icons'
+import { faBars, faTimes } from '@fortawesome/free-solid-svg-icons'
 
 const ToC = ({onQuestionClicked, data}) => {
     const [showMenu, setShowMenu] = useState(false);
@@ -20,7 +20,7 @@ const ToC = ({onQuestionClicked, data}) => {
                 context.setIndex(selectedIndex);
             }*/
             return(<>
-        <a href="#" className="toc-link" onClick={toggleMenu}><FontAwesomeIcon icon={faBars} /></a>
+        <a href="#" className="toc-link" onClick={toggleMenu}><FontAwesomeIcon icon={(showMenu)? faTimes: faBars} /></a>
         <div 
             className={(showMenu)? "toc-component in": "toc-component"}>
             <ul>

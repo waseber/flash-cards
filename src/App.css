@@ -15,6 +15,20 @@ h3{
   font-size: 5vh;
 }
 
+@media screen and (max-width: 992px){
+  h1{
+    font-size: xx-large;
+  }
+
+  h2{
+    font-size: x-large;
+  }
+
+  h3{
+    font-size: large;
+  }
+}
+
 .App {
   padding: 10px;
   text-align: center;
@@ -205,6 +219,7 @@ section{
   left: 0;
   margin: 10px;
 }
+
 ul li{
   position: relative;
   padding: 0;
@@ -229,6 +244,19 @@ ul li{
   left: 0;
   right: auto;
   transition: all 0.5s ease;
+}
+
+@media screen and (max-width: 992px){
+  ul{
+    padding: 5px;
+  }
+
+  .toc-component{
+    width: 75%;
+    max-width: 100%;
+    background-color: rgba(0,0,0,0.8);
+  }
+
 }
 
 .toc-item{
