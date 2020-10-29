@@ -1,6 +1,6 @@
 import React, { Component, useState } from 'react';
 import {
-  BrowserRouter as Router,
+  HashRouter  as Router,
   Route,
   Switch} from 'react-router-dom';
 import ReactGa from 'react-ga';
@@ -44,6 +44,9 @@ class App extends Component {
   getQuestionsAnswers = () => {
     return questionsObj;
   };
+  setIndex = (index = 0) => {
+    console.log(index)
+    return(index)};
   getAQuestion = (id) => {
     return questionsObj[id];
   };
@@ -66,6 +69,7 @@ class App extends Component {
           getCount: this.getCount,
           addQuestionAnswer: this.addQuestionAnswer,
           getQuestionsAnswers: this.getQuestionsAnswers,
+          setIndex: this.setIndex,
           getAQuestion: this.getAQuestion,
           editQuestion: this.editQuestion,
           deleteQuestion: this.deleteQuestion

@@ -6,6 +6,7 @@ export default React.createContext({
     getCount: ()=>{},
     addQuestionAnswer: (q,a) =>{},
     getQuestionsAnswers: () => {},
+    setIndex:() =>{},
     getAQuestion: ()=>{},
     editQuestion: ()=>{},
     deleteQuestion: ()=>{}

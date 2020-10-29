@@ -1,65 +1,57 @@
 import React, {useEffect, useState} from 'react';
+import QaContext from '../context/qa';
 import {Link} from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronRight, faChevronLeft, faEdit } from '@fortawesome/free-solid-svg-icons'
 
-const Carousel = ({obj}) => {
-    console.log(obj)   
+const Carousel = ({onChangeQuestion, obj, index}) => {
     const [showAnswer, setShowAnswer] = useState(false);
-    let [currentIndex, setCurrentIndex] = useState(0);
-   //let currentIndex= 0;
-    const count = obj.length;
+    let [currentIndex, setCurrentIndex] = useState(index);
+    let [displayIndex, setDisplayIndex] = useState(1);
     let [currentQuestion, setCurrentQuestion] = useState(obj[currentIndex].q);
     let [currentAnswer, setCurrentAnswer] = useState(obj[currentIndex].a);
-    const flipCard = (e) => {
-        e.preventDefault();
-        setShowAnswer(!showAnswer);
-        console.log("click")
-        //clone flash-card
-        /*const itm = document.getElementById("flash-card");
-        const cln = itm.cloneNode(true);
-        //append the new one to carousel-center
-        document.getElementById("carousel-center").appendChild(cln);
-        //delete the old one
-        document.getElementById("carousel-center").removeChild(itm);
-
-        
-        if(showAnswer!=true){
-            document.getElementById("flash-card").classList.add("ani-flip-up");
-        } else {
-            document.getElementById("flash-card").classList.add("ani-flip-down");
-        }*/
-    }
-    const prev = (e) => {
-        e.preventDefault();
-        if(currentIndex +1 > 1){
-            setCurrentIndex(currentIndex-=1)
-            setCurrentQuestion(obj[currentIndex].q)
-            setCurrentAnswer(obj[currentIndex].a)
-            setShowAnswer(false);
-        }
-    }
-
-    const next = (e) => {
-        e.preventDefault();
-        if(currentIndex < count){
-            setCurrentIndex(currentIndex+=1);
-            setCurrentQuestion(obj[currentIndex].q)
-            setCurrentAnswer(obj[currentIndex].a)
-            setShowAnswer(false);
-        }
-        
-    }
+    useEffect(()=>{
+        setCurrentIndex(index);
+        setCurrentQuestion(obj[currentIndex].q)
+        setCurrentAnswer(obj[currentIndex].a)
+        setShowAnswer(false);
+        setDisplayIndex(parseInt(currentIndex) + 1)
+    })
 
     return(            
-            <>
-            <h2>{currentIndex + 1} of {obj.length}</h2>
-            <section>
+        <QaContext.Consumer>
+        {context =>{ 
                 
+               //let currentIndex= 0;
+                const count = obj.length;
+                
+                const flipCard = (e) => {
+                    e.preventDefault();
+                    setShowAnswer(!showAnswer);
+                    //clone flash-card
+                    /*const itm = document.getElementById("flash-card");
+                    const cln = itm.cloneNode(true);
+                    //append the new one to carousel-center
+                    document.getElementById("carousel-center").appendChild(cln);
+                    //delete the old one
+                    document.getElementById("carousel-center").removeChild(itm);
+            
+                    
+                    if(showAnswer!=true){
+                        document.getElementById("flash-card").classList.add("ani-flip-up");
+                    } else {
+                        document.getElementById("flash-card").classList.add("ani-flip-down");
+                    }*/
+                }
+                
+            return (<>
+            <h3>{displayIndex} of {obj.length}</h3>
+            <section>                
                 <a href="#"
-                    onClick={prev}
+                    onClick={onChangeQuestion}
+                    data={parseInt(currentIndex)-1}
                     className={
-                        (currentIndex +1 > 1) ? "paddle" : "paddle vis-hidden"
+                        (displayIndex > 1) ? "paddle" : "paddle vis-hidden"
                     }
                     ><FontAwesomeIcon icon={faChevronLeft} /></a>
                 <div id="carousel-center">
@@ -71,7 +63,7 @@ const Carousel = ({obj}) => {
                                 (!showAnswer) ? "question ani-flip-up": "hide"
                         }>
                             <div className="inner-card">
-                            <h2>Question:</h2>
+                            <h3>Question:</h3>
                             <h3 >{currentQuestion}</h3>
                             </div>
                         </a>
@@ -81,7 +73,7 @@ const Carousel = ({obj}) => {
                                 (showAnswer) ? "answer  ani-flip-down": "hide"
                             }> 
                                 <div className="inner-card">
-                                <h2>Answer:</h2>
+                                <h3>Answer:</h3>
                             <h3 >{currentAnswer}</h3>
                         </div></a>
                     </article>
@@ -89,13 +81,15 @@ const Carousel = ({obj}) => {
                 </div>
                 
                 <a href="#" 
-                    onClick={next}
+                    onClick={onChangeQuestion}
+                    data={parseInt(currentIndex)+1}
                     className={
-                        (currentIndex +1 == count) ? "paddle vis-hidden" : "paddle"
+                        (displayIndex == count) ? "paddle vis-hidden" : "paddle"
                     }
                     ><FontAwesomeIcon icon={faChevronRight} /></a>
             </section>
-            </>
+            </>)}}
+        </QaContext.Consumer>
         //))
     
        
