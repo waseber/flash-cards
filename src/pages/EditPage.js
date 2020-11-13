@@ -10,7 +10,7 @@ const EditPage = ({match, props}) => {
     let [answerText, setAnswerText] = useState();
     let [status, setStatus] = useState();
 
-    
+    const set = match.params.set;
     const id = match.params.id;
     return(
         <QaContext.Consumer>
@@ -18,7 +18,7 @@ const EditPage = ({match, props}) => {
                 const editQuestion = (e) => {
                     e.preventDefault();
                     //check if question exists already
-                    context.editQuestion(id, questionText, answerText);
+                    context.editQuestion(set, id, questionText, answerText);
                     //document.getElementsByTagName('form')[0].reset();
                     setStatus("Successfully updated");
                 }
@@ -28,7 +28,7 @@ const EditPage = ({match, props}) => {
                     //confirm deletion
                     let r = window.confirm("Are you sure you want to delete this question?");
                     if (r == true) {
-                        context.deleteQuestion(id);
+                        context.deleteQuestion(set, id);
                         alert("Deleted");
                         window.location.href= "/flash-cards/play";
                     }                    
@@ -36,9 +36,6 @@ const EditPage = ({match, props}) => {
                 }
 
                 return (<>
-                    <header className="App-header">
-                        <NavBar count={context.getCount()} />
-                    </header>
                 <h2>Edit Your Question</h2>
                 <form onSubmit={editQuestion} key={id}>
                         <label>
@@ -48,7 +45,7 @@ const EditPage = ({match, props}) => {
                                 cols="50" 
                                 rows="3" 
                                 onChange={e => setQuestionText(e.target.value)}
-                                defaultValue={context.getAQuestion(id).q}></textarea>
+                                defaultValue={context.getAQuestion(set, id).q}></textarea>
                         </label>
                         <label>
                             Answer:
@@ -57,7 +54,7 @@ const EditPage = ({match, props}) => {
                                 type="text" 
                                 autoComplete="off"
                                 onChange={e => setAnswerText(e.target.value)} 
-                                defaultValue={context.getAQuestion(id).a}/>
+                                defaultValue={context.getAQuestion(set, id).a}/>
                         </label>
 
                         <button type="submit">Edit</button>

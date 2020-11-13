@@ -4,19 +4,30 @@ import {Link} from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronRight, faChevronLeft, faEdit } from '@fortawesome/free-solid-svg-icons'
 
-const Carousel = ({onChangeQuestion, obj, index}) => {
+const Carousel = ({set,onChangeQuestion, obj, index}) => {
     const [showAnswer, setShowAnswer] = useState(false);
     let [currentIndex, setCurrentIndex] = useState(index);
     let [displayIndex, setDisplayIndex] = useState(1);
     let [currentQuestion, setCurrentQuestion] = useState(obj[currentIndex].q);
     let [currentAnswer, setCurrentAnswer] = useState(obj[currentIndex].a);
+
+    const flipCard = (e) => {
+        e.preventDefault();
+        setShowAnswer(!showAnswer);
+    }
+
     useEffect(()=>{
         setCurrentIndex(index);
         setCurrentQuestion(obj[currentIndex].q)
         setCurrentAnswer(obj[currentIndex].a)
-        setShowAnswer(false);
+        
+        //if(showAnswer) setShowAnswer(false);
         setDisplayIndex(parseInt(currentIndex) + 1)
-    })
+    },)
+
+    useEffect(()=>{
+        setShowAnswer(false);
+    }, [index])
 
     return(            
         <QaContext.Consumer>
@@ -24,26 +35,7 @@ const Carousel = ({onChangeQuestion, obj, index}) => {
                 
                //let currentIndex= 0;
                 const count = obj.length;
-                
-                const flipCard = (e) => {
-                    e.preventDefault();
-                    setShowAnswer(!showAnswer);
-                    //clone flash-card
-                    /*const itm = document.getElementById("flash-card");
-                    const cln = itm.cloneNode(true);
-                    //append the new one to carousel-center
-                    document.getElementById("carousel-center").appendChild(cln);
-                    //delete the old one
-                    document.getElementById("carousel-center").removeChild(itm);
-            
-                    
-                    if(showAnswer!=true){
-                        document.getElementById("flash-card").classList.add("ani-flip-up");
-                    } else {
-                        document.getElementById("flash-card").classList.add("ani-flip-down");
-                    }*/
-                }
-                
+                                
             return (<>
             <h3>{displayIndex} of {obj.length}</h3>
             <section>                
@@ -77,7 +69,7 @@ const Carousel = ({onChangeQuestion, obj, index}) => {
                             <h3 >{currentAnswer}</h3>
                         </div></a>
                     </article>
-                    <Link to={`/edit/${currentIndex}`}><FontAwesomeIcon icon={faEdit} /></Link>
+                    <Link to={`/edit/${set}/${currentIndex}`}><FontAwesomeIcon icon={faEdit} /></Link>
                 </div>
                 
                 <a href="#" 

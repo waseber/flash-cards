@@ -7,6 +7,8 @@ export default React.createContext({
     addQuestionAnswer: (q,a) =>{},
     getQuestionsAnswers: () => {},
     setIndex:() =>{},
+    createSet:() => {},
+    getSets:()=>{},
     getAQuestion: ()=>{},
     editQuestion: ()=>{},
     deleteQuestion: ()=>{}
